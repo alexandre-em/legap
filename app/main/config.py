@@ -5,7 +5,8 @@ from dotenv import load_dotenv
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 DATABASE_URI_DEV = os.getenv('DATABASE_URI_DEV')
-DATABASE_URI_PROD = os.getenv('DATABASE_URI_PROD')
+DATABASE_URL = os.getenv('DATABASE_URL')
+
 
 class Config:
     SECRET_KEY = os.getenv('SECRET_KEY', 'my_precious_secret_key')
@@ -29,7 +30,8 @@ class TestingConfig(Config):
 
 class ProductionConfig(Config):
     DEBUG = False
-    SQLALCHEMY_DATABASE_URI = DATABASE_URI_PROD
+    SQLALCHEMY_DATABASE_URI = DATABASE_URL
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 
 config_by_name = dict(
