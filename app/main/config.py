@@ -4,7 +4,8 @@ from dotenv import load_dotenv
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 
-DATABASE_URI_DEV = os.getenv('DATABASE_URI_DEV')
+DATABASE_URI_DEV = os.getenv(
+    'DATABASE_URI_DEV') or 'postgresql://emlegn:emlegnd@172.20.0.2:5432/legndb'
 DATABASE_URI_PROD = os.getenv('DATABASE_URI_PROD')
 
 

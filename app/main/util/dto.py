@@ -18,3 +18,11 @@ class AuthDto:
         'password': fields.String(required=True, description='The user password '),
     })
 
+
+class SheetDto:
+    api = Namespace('sheet', description='sheet related operations')
+    sheet = api.model('sheet', {
+        'author': fields.String(required=True, description='user id ref'),
+        'title': fields.String(required=True, description='title s song'),
+        'url': fields.String(required=True, description='sheet s file url')
+    })
