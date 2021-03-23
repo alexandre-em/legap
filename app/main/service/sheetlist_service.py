@@ -1,5 +1,4 @@
 import datetime
-from sqlalchemy_searchable import search
 
 from app.main import db
 from app.main.model.sheetlist import SheetList

@@ -10,7 +10,8 @@ def register_user(self):
             email='example@gmail.com',
             username='username',
             password='123456',
-            firstname='alex'
+            firstname='alex',
+            avatar='http://sdkfjnsdkjfn.sdfnsdf.oisdnf.png'
         )),
         content_type='application/json'
     )

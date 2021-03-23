@@ -1,7 +1,7 @@
 import uuid
 import datetime
 
-from app.main import db
+from app.main import db, flask_bcrypt
 from app.main.model.user import User
 
 
@@ -14,6 +14,7 @@ def save_new_user(data):
             username=data['username'],
             password=data['password'],
             firstname=data['firstname'],
+            avatar=data['avatar'],
             registered_on=datetime.datetime.utcnow()
         )
         save_changes(new_user)
@@ -24,6 +25,29 @@ def save_new_user(data):
             'message': 'User already exists. Please Log in.',
         }
         return response_object, 409
+
+
+def update_user(id, data):
+    if data:
+        new_data = data
+        if 'password' in new_data:
+            password = data['password']
+            new_data.pop('password')
+            new_data['password_hash'] = flask_bcrypt.generate_password_hash(
+                password).decode('utf-8')
+        User.query.filter(User.public_id==id).\
+            update(new_data)
+        db.session.commit()
+        return {
+            'status': 'success',
+            'message': 'User successfully updated.'
+        }, 201
+    else:
+        response_object = {
+            'status': 'fail',
+            'message': 'User does not exists.',
+        }
+        return response_object, 404
 
 
 def get_all_users():

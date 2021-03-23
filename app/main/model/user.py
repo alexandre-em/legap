@@ -15,6 +15,7 @@ class User(db.Model):
     firstname = db.Column(db.String(100))
     username = db.Column(db.String(50), unique=True)
     password_hash = db.Column(db.String(100))
+    avatar = db.Column(db.String(950))
 
     @property
     def password(self):

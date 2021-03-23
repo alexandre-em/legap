@@ -7,7 +7,8 @@ class UserDto:
         'email': fields.String(required=True, description='user email address'),
         'username': fields.String(required=True, description='user username'),
         'password': fields.String(required=True, description='user password'),
-        'firstname': fields.String(description='user firstname')
+        'firstname': fields.String(description='user firstname'),
+        'avatar': fields.String(description='avatar url')
     })
 
 
@@ -25,4 +26,14 @@ class SheetDto:
         'author': fields.String(required=True, description='user id ref'),
         'title': fields.String(required=True, description='title s song'),
         'url': fields.String(required=True, description='sheet s file url')
+    })
+
+
+class ChangesDto:
+    api = Namespace('changes', description='chord changes related operations')
+    changes = api.model('sheet', {
+        'songname': fields.String(required=True, description='song name'),
+        'composer': fields.String(required=True, description='song composer'),
+        'year': fields.String(required=True, description='song year'),
+        'chords': fields.String(required=True, description='chord changes separator /./ between root and tone and /|/ between each chord')
     })
