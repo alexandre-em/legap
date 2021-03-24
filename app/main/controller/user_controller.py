@@ -2,7 +2,7 @@ from flask import request
 from flask_restplus import Resource
 
 from ..util.dto import UserDto
-from ..service.user_service import save_new_user, get_all_users, get_a_user
+from ..service.user_service import save_new_user, get_all_users, get_a_user, update_user
 
 api = UserDto.api
 _user = UserDto.user
@@ -38,3 +38,11 @@ class User(Resource):
             api.abort(404)
         else:
             return user
+    
+    @api.response(201, 'User successfully updated.')
+    @api.doc('Update user info')
+    @api.expect(_user)
+    def put(self, public_id):
+        '''Update User informations'''
+        put_data = request.json
+        return update_user(public_id, put_data)
