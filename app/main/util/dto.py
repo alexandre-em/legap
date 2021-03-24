@@ -31,7 +31,7 @@ class SheetDto:
 
 class ChangesDto:
     api = Namespace('changes', description='chord changes related operations')
-    changes = api.model('sheet', {
+    changes = api.model('changes', {
         'songname': fields.String(required=True, description='song name'),
         'composer': fields.String(required=True, description='song composer'),
         'year': fields.String(required=True, description='song year'),

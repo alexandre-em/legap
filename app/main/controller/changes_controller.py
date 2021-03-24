@@ -13,7 +13,7 @@ _changes = ChangesDto.changes
 class SheetList(Resource):
     @cross_origin(supports_credentials=True)
     @api.doc('list of song')
-    @api.marshal_with(_changes)
+    @api.marshal_list_with(_changes, envelope='data')
     def get(self):
         '''List all published changes'''
         return get_all()

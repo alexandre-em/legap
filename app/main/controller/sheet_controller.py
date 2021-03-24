@@ -13,7 +13,7 @@ _sheet = SheetDto.sheet
 class SheetList(Resource):
     @cross_origin(supports_credentials=True)
     @api.doc('list of sheets')
-    @api.marshal_with(_sheet)
+    @api.marshal_list_with(_sheet, envelope='data')
     def get(self):
         '''List all published sheets'''
         return get_sheets()
@@ -34,7 +34,7 @@ class SheetList(Resource):
 class SearchSheet(Resource):
     @cross_origin(supports_credentials=True)
     @api.doc('search a sheet by keyword')
-    @api.marshal_with(_sheet)
+    @api.marshal_list_with(_sheet, envelope='data')
     def get(self, keyword):
         '''get sheets by keyword'''
         sheets = search(keyword)
