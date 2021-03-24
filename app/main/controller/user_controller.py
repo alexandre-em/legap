@@ -1,5 +1,6 @@
 from flask import request
 from flask_restplus import Resource
+from flask_cors import cross_origin
 
 from ..util.dto import UserDto
 from ..service.user_service import save_new_user, get_all_users, get_a_user, update_user
@@ -10,12 +11,14 @@ _user = UserDto.user
 
 @api.route('/')
 class UserList(Resource):
+    @cross_origin(supports_credentials=True)
     @api.doc('list_of_registered_users')
     @api.marshal_list_with(_user, envelope='data')
     def get(self):
         """List all registered users"""
         return get_all_users()
 
+    @cross_origin(supports_credentials=True)
     @api.response(201, 'User successfully created.')
     @api.doc('create a new user')
     @api.expect(_user, validate=True)
@@ -29,6 +32,7 @@ class UserList(Resource):
 @api.param('public_id', 'The User identifier')
 @api.response(404, 'User not found.')
 class User(Resource):
+    @cross_origin(supports_credentials=True)
     @api.doc('get a user')
     @api.marshal_with(_user)
     def get(self, public_id):
@@ -38,7 +42,8 @@ class User(Resource):
             api.abort(404)
         else:
             return user
-    
+
+    @cross_origin(supports_credentials=True)
     @api.response(201, 'User successfully updated.')
     @api.doc('Update user info')
     @api.expect(_user)
