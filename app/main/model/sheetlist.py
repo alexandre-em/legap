@@ -7,7 +7,7 @@ class SheetList(db.Model):
     __tablename__ = "sheetlist"
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    author = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    author = db.Column(db.String(100), db.ForeignKey('user.public_id'), nullable=False)
     composer = db.Column(db.String(100))
     year = db.Column(db.String(10))
     title = db.Column(db.String(100))

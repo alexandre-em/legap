@@ -24,9 +24,13 @@ class AuthDto:
 class SheetDto:
     api = Namespace('sheet', description='sheet related operations')
     sheet = api.model('sheet', {
+        'id': fields.Integer(required=True, description='sheet id'),
         'author': fields.String(required=True, description='user id ref'),
         'title': fields.String(required=True, description='title s song'),
-        'url': fields.String(required=True, description='sheet s file url')
+        'url': fields.String(required=True, description='sheet s file url'),
+        'composer': fields.String(required=True, description='song s composer name'),
+        'year': fields.String(required=True, description='year the song was composed'),
+        'published_on': fields.DateTime(required=False, description='publication date')
     })
 
 

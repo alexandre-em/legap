@@ -68,8 +68,10 @@ class Auth:
                 response_object = {
                    'status': 'success',
                         'data': {
+                            'username': user.username,
                             'user_id': user.id,
                             'user_public': user.public_id,
+                            'avatar': user.avatar,
                             'email': user.email,
                             'registered_on': str(user.registered_on)
                         }
